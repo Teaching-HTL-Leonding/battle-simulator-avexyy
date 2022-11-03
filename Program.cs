@@ -25,25 +25,26 @@ const int MONSTERKNIGHTSPEED = 3;
 const int MONSTERKNIGHTATTACK = 4;
 const int MONSTERKNIGHTHEALTH = 15;
 const int MONSTERKNIGHTARMOR = 3;
-const int DARKGOBLINSPEED= 3;
+const int DARKGOBLINSPEED = 3;
 const int DARKGOBLINATTACK = 1;
 const int DARKGOBLINHEALTH = 10;
 const int DARKGOBLINARMOR = 8; 
 
-int player1Attack = 0;
-int player1Health = 0;
-int player1Speed = 0;
-int player1Armor = 0;
-int player2Attack = 0;
-int player2Health = 0;
-int player2Speed = 0;
-int player2Armor = 0;
+double player1Attack = 0;
+double player1Health = 0;
+double player1Speed = 0;
+double player1Armor = 0;
+double player2Attack = 0;
+double player2Health = 0;
+double player2Speed = 0;
+double player2Armor = 0;
 
-System.Console.Write("Player 1, which character do you want to be? (Pirate, Stone Chewer, Ghost Warrior, Outworlder, Monster Knight or Dark Goblin) ");
-string player1 = Console.ReadLine()!;
 System.Console.WriteLine();
-System.Console.Write("Player 2, which character do you want to be? (Pirate, Stone Chewer, Ghost Warrior, Outworlder, Monster Knight or Dark Goblin) ");
+System.Console.Write("Player 1, choose your character (Pirate, Stone Chewer, Ghost Warrior, Outworlder, Monster Knight or Dark Goblin): ");
+string player1 = Console.ReadLine()!;
+System.Console.Write("Player 2, choose your character (Pirate, Stone Chewer, Ghost Warrior, Outworlder, Monster Knight or Dark Goblin): ");
 string player2 = Console.ReadLine()!;
+System.Console.WriteLine();
 
 switch(player1)
 {
@@ -88,6 +89,10 @@ switch(player1)
     player1Armor = DARKGOBLINARMOR;
     player1Speed = DARKGOBLINSPEED;
     break;
+
+    default:
+    System.Console.WriteLine("Invalid input!!!");
+    return;
 }
 
 switch(player2)
@@ -133,32 +138,35 @@ switch(player2)
     player2Armor = DARKGOBLINARMOR;
     player2Speed = DARKGOBLINSPEED;
     break;
-}
 
-if(player1 == player2)
-{
-    System.Console.WriteLine("The battle is a draw!");
+    default:
+    System.Console.WriteLine("Invalid input!!!");
+    return;
 }
 
 player1Health += player1Armor;
 player2Health += player2Armor;
 
-int fight1 = player1Attack * player1Speed;
-int fight2 = player2Attack * player2Speed;
-int i = 0;
+double fight1 = player1Attack * player1Speed;
+double fight2 = player2Attack * player2Speed;
+
 while(player1Health > 0 && player2Health > 0)
 {
     player1Health -= fight2;
     player2Health -= fight1;
-    i++;
+}
 
-    if(player1Health < 0)
-    {
-        System.Console.WriteLine($"{player2} (player 2) won the Battle");
-    }
+if(player1Health > 0)
+{
+    System.Console.WriteLine($"{player1} (player 1) won the Battle");
+}
 
-    if(player2Health < 0)
-    {
-        System.Console.WriteLine($"{player1} (player 1) won the battle");
-    }
+if(player2Health > 0)
+{
+    System.Console.WriteLine($"{player2} (player 2) won the battle");
+}
+
+if(player1Health <= 0 && player2Health <= 0 )
+{
+    System.Console.WriteLine("The battle ended in a draw");
 }
